@@ -78,11 +78,11 @@ contract ScrappySquirrels is Ownable, ERC721Enumerable {
         uint cost = 0;
 
         if (!freeMintDone[msg.sender] && totalMinted < freeMintTier) {
-            cost = price.mul(_count);
-        }
-        else {
             cost = price.mul(_count - 1);
             freeMintDone[msg.sender] = true;
+        }
+        else {
+            cost = price.mul(_count);
         }
 
         require(msg.value >= price.mul(_count), "Not enough ether to purchase NFTs.");
